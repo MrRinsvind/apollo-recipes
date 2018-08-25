@@ -17,4 +17,21 @@ exports.typeDefs = `
     joinDate: String
     favorites: [Recipe]
   }
+
+
+  type Query{
+    getAllRecipes: [Recipe]
+  }
+
+  input RecipeInput {
+    name: String!
+    description: String!
+    category: String!
+    instructions: String!
+    username: String
+  }
+
+  type Mutation {
+    addRecipe(input: RecipeInput): Recipe
+  }
 `
