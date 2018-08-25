@@ -1,5 +1,6 @@
 exports.typeDefs = `
   type Recipe {
+    _id: ID
     name: String!
     category: String!
     description: String!
@@ -11,6 +12,7 @@ exports.typeDefs = `
 
 
   type User {
+    _id: ID
     username: String! @unique
     password: String!
     email: String!
