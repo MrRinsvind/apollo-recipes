@@ -12,3 +12,18 @@ export const GET_ALL_RECIPES = gql`
     }
   }
 `
+
+
+// User Mutations
+
+export const SIGNUP_USER = gql`
+  mutation($username: String!, $email: String!, $password: String!) {
+    signupUser(input:{
+      username: $username
+      email: $email
+      password: $password
+    }){
+      token
+    }
+  }
+`
