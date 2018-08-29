@@ -5,6 +5,8 @@ import './index.css';
 import App from './components/App';
 import Signin from './components/Auth/Signin';
 import Signup from './components/Auth/Signup';
+import widthSession from './components/withSession'
+
 
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
 import ApolloClient from 'apollo-boost'
@@ -43,9 +45,10 @@ const Root = () => (
   </Router>
 )
 
+const RootWithSession = widthSession(Root)
 
 ReactDOM.render(
   <ApolloProvider client={client}>
-    <Root />
+    <RootWithSession />
   </ApolloProvider>
   , document.getElementById('root'));
