@@ -20,7 +20,6 @@ export const GET_RECIPE = gql`
       instructions
       createdDate
       likes
-      username
     }
   }
 `
@@ -36,11 +35,7 @@ export const ADD_RECIPE = gql`
     }){
       _id
       name
-      category
       description
-      instructions
-      createdDate
-      likes
     }
   }
 `

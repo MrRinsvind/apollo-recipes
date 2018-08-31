@@ -20,27 +20,6 @@ export const GET_RECIPE = gql`
       instructions
       createdDate
       likes
-      username
-    }
-  }
-`
-
-export const ADD_RECIPE = gql`
-  mutation($name:String!, $category:String!, $description:String!, $instructions: String!, $username: String ) {
-    addRecipe(input:{
-      name:$name
-      category:$category
-      description:$description
-      instructions:$instructions
-      username:$username
-    }){
-      _id
-      name
-      category
-      description
-      instructions
-      createdDate
-      likes
     }
   }
 `

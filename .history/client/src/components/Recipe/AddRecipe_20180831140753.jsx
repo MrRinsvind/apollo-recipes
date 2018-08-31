@@ -18,7 +18,7 @@ class AddRecipe extends React.Component {
   state={...initialState}
   componentDidMount(){
     if(!get(this.props, 'session.getCurrentUser.username')){
-      return this.props.history.push('/')
+      this.props.history.push('/')
     }
     this.setState({
       username: this.props.session.getCurrentUser.username
@@ -59,7 +59,7 @@ class AddRecipe extends React.Component {
                 </select>
                 <input type="text" name="description" placeholder="Add description" onChange={this.handleChange} value={this.state.description}/>
                 <textarea name="instructions" placeholder="Add instructions" onChange={this.handleChange} value={this.state.instructions}></textarea>
-                <button onClick={(event) => this.handleSubmit(event, addRecipe)} disabled={loading || this.validateForm()} type="submit" className="button-primary">Submit</button> 
+                <button onClick={(event) => this.handleSubmit(event, addRecipe)} disabled={loading || this.validateForm} type="submit" className="button-primary">Submit</button> 
                 {error && <Error error={error}/>}
               </form>
             </div>

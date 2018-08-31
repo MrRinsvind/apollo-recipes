@@ -1,6 +1,4 @@
 import React from 'react'
-import { withRouter } from 'react-router-dom'
-import { get } from 'lodash'
 
 import { Mutation } from 'react-apollo'
 import { ADD_RECIPE } from '../../queries'
@@ -15,11 +13,8 @@ const initialState = {
 }
 
 class AddRecipe extends React.Component {
-  state={...initialState}
+  state=initialState
   componentDidMount(){
-    if(!get(this.props, 'session.getCurrentUser.username')){
-      return this.props.history.push('/')
-    }
     this.setState({
       username: this.props.session.getCurrentUser.username
     })
@@ -38,8 +33,7 @@ class AddRecipe extends React.Component {
   handleSubmit = (event, addRecipe) => {
     event.preventDefault()
     addRecipe().then(({ data }) => {
-      this.setState({...initialState})
-      this.props.history.push('/')
+      console.log(data)
     })
   }
   render(){
@@ -59,7 +53,7 @@ class AddRecipe extends React.Component {
                 </select>
                 <input type="text" name="description" placeholder="Add description" onChange={this.handleChange} value={this.state.description}/>
                 <textarea name="instructions" placeholder="Add instructions" onChange={this.handleChange} value={this.state.instructions}></textarea>
-                <button onClick={(event) => this.handleSubmit(event, addRecipe)} disabled={loading || this.validateForm()} type="submit" className="button-primary">Submit</button> 
+                <button onClick={(event) => this.handleSubmit(event, addRecipe)} disabled={loading || this.validateForm} type="submit" className="button-primary">Submit</button> 
                 {error && <Error error={error}/>}
               </form>
             </div>
@@ -70,4 +64,4 @@ class AddRecipe extends React.Component {
   }
 }
 
-export default withRouter(AddRecipe)
+export default AddRecipe

@@ -59,7 +59,7 @@ class AddRecipe extends React.Component {
                 </select>
                 <input type="text" name="description" placeholder="Add description" onChange={this.handleChange} value={this.state.description}/>
                 <textarea name="instructions" placeholder="Add instructions" onChange={this.handleChange} value={this.state.instructions}></textarea>
-                <button onClick={(event) => this.handleSubmit(event, addRecipe)} disabled={loading || this.validateForm()} type="submit" className="button-primary">Submit</button> 
+                <button onClick={(event) => this.handleSubmit(event, addRecipe)} disabled={loading || this.validateForm} type="submit" className="button-primary">Submit</button> 
                 {error && <Error error={error}/>}
               </form>
             </div>
