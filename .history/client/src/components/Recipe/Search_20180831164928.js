@@ -1,21 +1,16 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
+import React from 'react'
 import { ApolloConsumer } from 'react-apollo'
 import { SEARCH_RECIPES } from '../../queries'
 
 
 class Search extends React.Component{
-  state={
-    searchResult: []
-  }
-  handleChange = ({ searchRecipes }) => {
-    this.setState({
-      searchResult: searchRecipes
-    })
+  handleChange = data => {
+    console.log(data)
   }
   render(){
-    const { searchResult } = this.state
     return(
       <ApolloConsumer>
         { client => (
@@ -23,13 +18,13 @@ class Search extends React.Component{
               <input type="search" placeholder="Search for Recipes" onChange={async (event)=>{
                 event.persist()
                 const {data} = await client.query({
-                   query: SEARCH_RECIPES,
+                  query: SEARCH_RECIPES,
                   variables: { searchTerm: event.target.value }
                 })
                 this.handleChange(data)
               }}/>
               <ul>
-                {searchResult.map(recipe => (
+                {data.searchRecipes.map(recipe => (
                   <li key={recipe._id}>
                     <Link to={`/recipes/${recipe._id}`}><h4>{recipe.name}</h4></Link>
                     <p>{recipe.likes}</p>

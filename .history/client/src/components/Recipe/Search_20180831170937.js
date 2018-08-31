@@ -11,7 +11,7 @@ class Search extends React.Component{
   }
   handleChange = ({ searchRecipes }) => {
     this.setState({
-      searchResult: searchRecipes
+      
     })
   }
   render(){
@@ -29,12 +29,12 @@ class Search extends React.Component{
                 this.handleChange(data)
               }}/>
               <ul>
-                {searchResult.map(recipe => (
+                {/* {data.searchRecipes.map(recipe => (
                   <li key={recipe._id}>
                     <Link to={`/recipes/${recipe._id}`}><h4>{recipe.name}</h4></Link>
                     <p>{recipe.likes}</p>
                   </li>
-                ))}
+                ))} */}
               </ul>
             </div>
         )}

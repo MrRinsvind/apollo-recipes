@@ -37,11 +37,10 @@ exports.resolvers = {
         return null
       }
       const user = await User.findOne({ username: currentUser.username })
-        .populate({
+        .populate({]
           path: 'favorites',
           model: 'Recipe'
         })
-    
       
       return user
     }

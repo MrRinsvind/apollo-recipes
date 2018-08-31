@@ -24,9 +24,8 @@ exports.resolvers = {
         },{
           score: { $meta: "textScore" }
         }).sort({
-          score: { $meta: "textScore" }
+          
         })
-        return searchResults
       }else{
         const recipes = await Recipe.find().sort({ likes: 'desc', createdDate: 'desc' })
         return recipes
@@ -37,11 +36,10 @@ exports.resolvers = {
         return null
       }
       const user = await User.findOne({ username: currentUser.username })
-        .populate({
+        .populate({]
           path: 'favorites',
           model: 'Recipe'
         })
-    
       
       return user
     }
