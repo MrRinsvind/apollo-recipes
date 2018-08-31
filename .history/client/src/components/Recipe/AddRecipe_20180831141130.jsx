@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom'
 import { get } from 'lodash'
 
 import { Mutation } from 'react-apollo'
-import { ADD_RECIPE, GET_ALL_RECIPES } from '../../queries'
+import { ADD_RECIPE } from '../../queries'
 import Error from '../Error'
 
 const initialState = {
@@ -35,16 +35,6 @@ class AddRecipe extends React.Component {
     const { name, category, instructions,  description } = this.state
     return !name || !category || !instructions || !description
   }
-  updateCache = (cache, { data: { addRecipe }}) => {
-    const { getAllRecipes } = cache.readQuery({ query: GET_ALL_RECIPES }) 
-
-    cache.writeQuery({
-      query: GET_ALL_RECIPES,
-      data: {
-        getAllRecipes: [addRecipe, ...getAllRecipes]
-      }
-    })
-  }
   handleSubmit = (event, addRecipe) => {
     event.preventDefault()
     addRecipe().then(({ data }) => {
@@ -54,7 +44,7 @@ class AddRecipe extends React.Component {
   }
   render(){
     return(
-      <Mutation mutation={ADD_RECIPE} variables={{ ...this.state }} update={this.updateCache}>
+      <Mutation mutation={ADD_RECIPE} variables={{ ...this.state }}>
         { ( addRecipe, { data, loading, error } ) => {
           return(
             <div className="App">

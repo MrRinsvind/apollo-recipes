@@ -54,7 +54,7 @@ class AddRecipe extends React.Component {
   }
   render(){
     return(
-      <Mutation mutation={ADD_RECIPE} variables={{ ...this.state }} update={this.updateCache}>
+      <Mutation mutation={ADD_RECIPE} variables={{ ...this.state }} update={}>
         { ( addRecipe, { data, loading, error } ) => {
           return(
             <div className="App">

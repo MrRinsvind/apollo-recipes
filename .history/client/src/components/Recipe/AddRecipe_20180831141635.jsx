@@ -37,13 +37,6 @@ class AddRecipe extends React.Component {
   }
   updateCache = (cache, { data: { addRecipe }}) => {
     const { getAllRecipes } = cache.readQuery({ query: GET_ALL_RECIPES }) 
-
-    cache.writeQuery({
-      query: GET_ALL_RECIPES,
-      data: {
-        getAllRecipes: [addRecipe, ...getAllRecipes]
-      }
-    })
   }
   handleSubmit = (event, addRecipe) => {
     event.preventDefault()
@@ -54,7 +47,7 @@ class AddRecipe extends React.Component {
   }
   render(){
     return(
-      <Mutation mutation={ADD_RECIPE} variables={{ ...this.state }} update={this.updateCache}>
+      <Mutation mutation={ADD_RECIPE} variables={{ ...this.state }} update={}>
         { ( addRecipe, { data, loading, error } ) => {
           return(
             <div className="App">
