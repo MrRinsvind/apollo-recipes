@@ -5,6 +5,7 @@ import { get } from 'lodash'
 import { Mutation } from 'react-apollo'
 import { ADD_RECIPE, GET_ALL_RECIPES } from '../../queries'
 import Error from '../Error'
+import withAuth from '../withAuth'
 
 const initialState = {
   name: '',
@@ -80,4 +81,4 @@ class AddRecipe extends React.Component {
   }
 }
 
-export default withRouter(AddRecipe) 
+export default withAuth(session => session && session.getCurrentUser)(withRouter(AddRecipe))

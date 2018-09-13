@@ -29,7 +29,7 @@ class Search extends React.Component{
               }}/>
               <ul>
                 {searchResult.map(recipe => (
-                 <SearchItem recipe={recipe} key={recipe._id}/> 
+                 <SearchItem {...recipe} key={recipe._id}/> 
                 ))}
               </ul>
             </div>
