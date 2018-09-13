@@ -32,6 +32,10 @@ exports.resolvers = {
         return recipes
       }
     },
+    deleteUserRecipe: async(root, {_id}, { Recipe }) => {
+      const recipe = await Recipe.findOneAndRemove({ _id })
+      return recipe
+    },
     getUserRecipes: async(root, { username }, { Recipe }) =>{
       const userRecipes = await Recipe.find({username}).sort({
         createdDate: 'desc'

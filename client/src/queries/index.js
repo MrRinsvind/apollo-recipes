@@ -33,6 +33,13 @@ export const SEARCH_RECIPES = gql`
     }
   }
 `
+export const DELETE_USER_RECIPE = gql`
+  mutation($_id: ID!){
+    deleteUserRecipe(_id: $_id){
+      _id
+    }
+  }
+`
 
 
 export const ADD_RECIPE = gql`
@@ -104,3 +111,4 @@ export const GET_USER_RECIPES = gql`
     }
   }
 `
+

@@ -54,7 +54,10 @@ exports.typeDefs = `
 
   type Mutation {
     addRecipe(input: RecipeInput): Recipe
+    deleteUserRecipe(_id: ID ): Recipe
+
     signinUser(input: SigninInput): Token
     signupUser(input: SignupInput): Token
+
   }
 `

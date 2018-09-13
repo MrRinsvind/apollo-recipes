@@ -1,8 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-import { Query } from 'react-apollo'
-import { GET_USER_RECIPES } from '../../queries'
+import { Query, Mutation } from 'react-apollo'
+import { GET_USER_RECIPES, DELETE_USER_RECIPE } from '../../queries'
 
 const UserRecipes = ({ username }) => (
  <Query query={GET_USER_RECIPES} variables={{username}}>
@@ -17,7 +17,16 @@ const UserRecipes = ({ username }) => (
             data.getUserRecipes.map(recipe => (
               <li key={recipe._id}>
                 <Link to={`/recipes/${recipe._id}`}><p>{recipe.name}</p></Link>  
-                <p>Likes: {recipe.likes}</p>
+                <p style={{ marginBottom: '0'}}>Likes: {recipe.likes}</p>
+                <Mutation mutation={DELETE_USER_RECIPE} variables={{ _id: recipe._id }}>
+                  {
+                    deleteUserRecipe => {
+                      return(
+                        <p className="delete-button" onClick={this.handleDelete}>X</p>
+                      )
+                    }
+                  }
+                </Mutation>
               </li>
             ))
           }
