@@ -43,7 +43,8 @@
     "graphql": "^0.13.2",
     "graphql-tools": "^3.1.1",
     "jsonwebtoken": "^8.3.0",
-    "mongoose": "^5.2.8"
+    "mongoose": "^5.2.8",
+    "react-pose": "^3.3.3"
   },
   "devDependencies": {
     "nodemon": "^1.18.3"

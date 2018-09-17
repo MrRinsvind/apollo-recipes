@@ -2,6 +2,7 @@ exports.typeDefs = `
   type Recipe {
     _id: ID
     name: String!
+    imageUrl: String!
     category: String!
     description: String!
     instructions: String!
@@ -38,6 +39,7 @@ exports.typeDefs = `
     description: String!
     category: String!
     instructions: String!
+    imageUrl: String!
     username: String
   }
 

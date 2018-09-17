@@ -11,6 +11,7 @@ export const recipeFragments = {
       createdDate
       likes
       username
+      imageUrl
     }
   `,
   like: gql`

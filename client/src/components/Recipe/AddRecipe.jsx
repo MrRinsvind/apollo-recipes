@@ -1,6 +1,7 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom'
 import { get } from 'lodash'
+import CKEditor from 'react-ckeditor-component'
 
 import { Mutation } from 'react-apollo'
 import { ADD_RECIPE, GET_ALL_RECIPES, GET_USER_RECIPES } from '../../queries'
@@ -12,7 +13,8 @@ const initialState = {
   instructions: '',
   category: 'Breakfast',
   description: '',
-  username: ''
+  username: '',
+  imageUrl: '',
 }
 
 class AddRecipe extends React.Component {
@@ -32,9 +34,15 @@ class AddRecipe extends React.Component {
       [name]: value
     })
   }
+
+  handleEditorChange = event =>  {
+    const newContent = event.editor.getData()
+    this.setState({ instructions: newContent })
+  }
+
   validateForm = () => {
-    const { name, category, instructions,  description } = this.state
-    return !name || !category || !instructions || !description
+    const { name, category, instructions,  description, imageUrl } = this.state
+    return !name || !category || !instructions || !description || !imageUrl
   }
   updateCache = (cache, { data: { addRecipe }}) => {
     const { getAllRecipes } = cache.readQuery({ query: GET_ALL_RECIPES }) 
@@ -72,6 +80,7 @@ class AddRecipe extends React.Component {
               <h2 className="App">Add Recipe</h2>
               <form onSubmit={(event) => this.handleSubmit(event, addRecipe)} className="form">
                 <input type="text" value={this.state.name} name="name" placeholder="Recipe Name" onChange={this.handleChange}/>
+                <input type="text" value={this.state.imageUrl} name="imageUrl" placeholder="Recipe Image" onChange={this.handleChange}/>
                 <select name="category" onChange={this.handleChange} value={this.state.category}>
                   <option value="Breakfast">Breakfast</option>
                   <option value="Lunch">Lunch</option>
@@ -79,8 +88,15 @@ class AddRecipe extends React.Component {
                   <option value="Snack">Snack</option>
                 </select>
                 <input type="text" name="description" placeholder="Add description" onChange={this.handleChange} value={this.state.description}/>
-                <textarea name="instructions" placeholder="Add instructions" onChange={this.handleChange} value={this.state.instructions}></textarea>
-                <button onClick={(event) => this.handleSubmit(event, addRecipe)} disabled={loading || this.validateForm()} type="submit" className="button-primary">Submit</button> 
+
+
+                <label htmlFor="instructions">Add instructions</label>
+                <CKEditor
+                  name="instructions"
+                  content={this.state.instructions}
+                  events={{ change: this.handleEditorChange }}
+                />
+                <button onClick={(event) => this.handleSubmit(event, addRecipe)} disabled={loading || this.validateForm()} type="submit" className="button-primary">Submit</button>
                 { error && <Error error={error}/> }
               </form>
             </div>

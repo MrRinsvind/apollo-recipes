@@ -19,7 +19,7 @@ class Search extends React.Component{
       <ApolloConsumer>
         { client => (
             <div className="App">
-              <input type="search" placeholder="Search for Recipes" onChange={async (event)=>{
+              <input type="search" className="search" placeholder="Search for Recipes" onChange={async (event)=>{
                 event.persist()
                 const {data} = await client.query({
                    query: SEARCH_RECIPES,
