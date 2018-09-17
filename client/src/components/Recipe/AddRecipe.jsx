@@ -60,7 +60,10 @@ class AddRecipe extends React.Component {
         variables={{ ...this.state }}
         update={this.updateCache}
         refetchQueries={()=>[
-          { query: GET_USER_RECIPES, variables: { username: this.state.username } },
+          { 
+            query: GET_USER_RECIPES, 
+            variables: { username: this.state.username } 
+          },
         ]}
       >
         { ( addRecipe, { data, loading, error } ) => {
@@ -78,7 +81,7 @@ class AddRecipe extends React.Component {
                 <input type="text" name="description" placeholder="Add description" onChange={this.handleChange} value={this.state.description}/>
                 <textarea name="instructions" placeholder="Add instructions" onChange={this.handleChange} value={this.state.instructions}></textarea>
                 <button onClick={(event) => this.handleSubmit(event, addRecipe)} disabled={loading || this.validateForm()} type="submit" className="button-primary">Submit</button> 
-                {error && <Error error={error}/>}
+                { error && <Error error={error}/> }
               </form>
             </div>
           )

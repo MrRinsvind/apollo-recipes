@@ -20,6 +20,7 @@ export const GET_RECIPE = gql`
   }
   ${recipeFragments.recipe}
 `
+
 export const SEARCH_RECIPES = gql`
   query($searchTerm: String){
     searchRecipes(searchTerm: $searchTerm){
