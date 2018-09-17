@@ -79,12 +79,21 @@ exports.resolvers = {
       const recipe = await Recipe.findOneAndRemove({ _id })
       return recipe
     },
+    likeRecipe: async(root, { _id, username }, { Recipe, User}) => {
+      const recipe = await Recipe.findOneAndUpdate({ _id }, { $inc: { likes: 1}}) 
+      const user = await User.findOneAndUpdate({ username }, { $addToSet: { favorites: _id } })
+      return recipe
+    },
+    unlikeRecipe: async(root, { _id, username }, { Recipe, User}) => {
+      const recipe = await Recipe.findOneAndUpdate({ _id }, { $inc: { likes: - 1}}) 
+      const user = await User.findOneAndUpdate({ username }, { $pull: { favorites: _id } })
+      return recipe
+    },
     signupUser: async(root, { input }, { User }) => {
       const user = await User.findOne({ username: input.username })
       if(user){
         throw new Error('User already exists')
       }
-
       const newUser = await new User({
         username: input.username,
         email: input.email,
