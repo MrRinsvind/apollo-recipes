@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import { Mutation } from 'react-apollo'
-import Error from '../../common/widgets/Error'
+
+import SignupForm from './SignupForm'
 import { SIGNUP_USER } from '../../queries'
 
 const initialState = {
@@ -11,7 +12,7 @@ const initialState = {
   passwordConfirmation: "",
 }
 
-class Signup extends Component{
+class SignupContainer extends Component{
 
   state = { ...initialState }
   handleChange = event => {
@@ -43,14 +44,15 @@ class Signup extends Component{
         <Mutation mutation={SIGNUP_USER} variables={{ username, email, password }}>
           {( signupUser, { data, loading, error })=>{
             return(
-              <form className="form" onSubmit={event => this.handleSubmit(event, signupUser)}>
-                <input onChange={this.handleChange} value={username} type="text" name="username" placeholder="Username" />
-                <input onChange={this.handleChange} value={email} type="text" name="email" placeholder="Email Adress" />
-                <input onChange={this.handleChange} value={password} type="password" name="password" placeholder="Password" />
-                <input onChange={this.handleChange} value={passwordConfirmation} type="password" name="passwordConfirmation" placeholder="Confirm Password" />
-                <button disabled={loading || this.validateForm()} type="submit" className="button-primary">Submit</button>
-                {error && <Error error={error}/>}
-              </form>
+              <SignupForm  
+                signupUser={signupUser}
+                data={data}
+                loading={error}
+                passwordConfirmation={passwordConfirmation}
+                handleSubmit={handleSubmit}
+                handleChange={handleChange}
+                { ...this.state}
+              />
             )
           }}
         </Mutation>
@@ -59,4 +61,4 @@ class Signup extends Component{
   }
 }
 
-export default withRouter(Signup)
+export default withRouter(SignupContainer)

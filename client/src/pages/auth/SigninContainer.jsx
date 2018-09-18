@@ -3,14 +3,14 @@ import { withRouter } from 'react-router-dom'
 import { Mutation } from 'react-apollo'
 
 import { SIGNIN_USER } from '../../queries'
-
+import SigninForm from './SigninForm'
 
 const initialState = {
   username: "",
   password: "",
 }
 
-class Signin extends Component{
+class SigninContainer extends Component{
   state = { ...initialState }
   handleChange = event => {
     const { name, value } = event.target
@@ -46,6 +46,7 @@ class Signin extends Component{
               signinUser={signinUser}
               handleSubmit={this.handleSubmit}
               handleChange={this.handleChange}
+              validateForm={this.validateForm}
             />
           }}
         </Mutation>
@@ -54,4 +55,4 @@ class Signin extends Component{
   }
 }
 
-export default withRouter(Signin)
+export default withRouter(SigninContainer)

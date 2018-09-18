@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import { Mutation } from 'react-apollo'
-import Error from '../Error'
+import Error from '../../common/widgets/Error'
 import { SIGNIN_USER } from '../../queries'
 
 const initialState = {

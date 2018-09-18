@@ -18,8 +18,8 @@ import ApolloClient from 'apollo-boost'
 import { ApolloProvider } from 'react-apollo'
 
 const client = new ApolloClient({
-  // uri: 'http://localhost:4444/graphql',
-  uri: 'https://mr-rinsvind-recipes.herokuapp.com/graphql',
+  uri: 'http://localhost:4444/graphql',
+  // uri: 'https://mr-rinsvind-recipes.herokuapp.com/graphql',
   fetchOptions: {
     credentials: 'include'
   },
