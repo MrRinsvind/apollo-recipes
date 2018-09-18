@@ -11,7 +11,7 @@ import Search from './components/Recipe/Search'
 import AddRecipe from './components/Recipe/AddRecipe'
 import Profile from './components/Profile/Profile'
 import RecipePage from './components/Recipe/RecipePage'
-
+import SigninContainer from './pages/auth/SigninContainer'
 
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
 import ApolloClient from 'apollo-boost'
@@ -47,7 +47,7 @@ const Root = ({ refetch, session }) => (
       <Switch>
         <Route path="/" exact component={App} />
         <Route path="/search" exact component={Search} />
-        <Route path="/signin" render={()=> <Signin refetch={refetch} />} />
+        <Route path="/signin" render={()=> <SigninContainer refetch={refetch} />} />
         <Route path="/signup" render={()=> <Signup refetch={refetch} />} />
         <Route path="/recipe/add"  render={() => <AddRecipe session={session}/> } />
         <Route path="/recipes/:_id" component={RecipePage} />
