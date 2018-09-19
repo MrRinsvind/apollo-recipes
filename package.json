@@ -47,6 +47,7 @@
     "react-pose": "^3.3.3"
   },
   "devDependencies": {
+    "css-loader": "^1.0.0",
     "nodemon": "^1.18.3"
   }
 }

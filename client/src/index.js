@@ -65,3 +65,6 @@ ReactDOM.render(
     <RootWithSession />
   </ApolloProvider>
   , document.getElementById('root'));
+
+
+module.hot.accept();

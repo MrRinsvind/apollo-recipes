@@ -54,7 +54,6 @@ app.use(async (req, res, next) => {
   next()
 })
 
-
 // Create GraphiQL application
 app.use('/graphiql', graphiqlExpress({ endpointURL: 'graphql'}))
 
