@@ -1,4 +1,6 @@
-exports.typeDefs = `
+const { gql } = require('apollo-server-express');
+
+exports.typeDefs = gql`
   type Recipe {
     _id: ID
     name: String!
