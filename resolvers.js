@@ -60,7 +60,6 @@ exports.resolvers = {
         category: input.category,
         instructions: input.instructions,
         username: input.username,
-        imageUrl: input.imageUrl,
       }).save()
       return newRecipe
     },
