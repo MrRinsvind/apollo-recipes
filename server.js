@@ -32,19 +32,19 @@ const corsOptions = {
 app.use(cors(corsOptions))
 
 // Set up JWT authentication middleware
-// app.use(async (req, res, next) => {
-//   const token = req.headers['authorization']
-//   if(token !== 'null'){
-//     try{
-//       const currentUser = await jwt.verify(token, 'dsgsdgsdgr45t4tg4s4wgs')
-//       req.currentUser = currentUser
-//     }
-//     catch(err){
-//       console.log(err)
-//     }
-//   }
-//   next()
-// })
+app.use(async (req, res, next) => {
+  const token = req.headers['authorization']
+  if(token !== 'null'){
+    try{
+      const currentUser = await jwt.verify(token, 'dsgsdgsdgr45t4tg4s4wgs')
+      req.currentUser = currentUser
+    }
+    catch(err){
+      req.currentUser = undefined
+    }
+  }
+  next()
+})
 
 
 
@@ -59,7 +59,7 @@ const server = new ApolloServer({
 
 server.applyMiddleware({ app })
 
-if(process.env.NODE_ENV === 'production'){
+if(process.env.NODE_ENV === 'production' || true){
   app.use(express.static('client/build'))
   app.get('*', (req, res)=>{
     res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))

@@ -73,7 +73,7 @@ exports.resolvers = {
       if(!isValidPassword){
         throw new Error('Invalid password')
       }
-      return { token: createToken(user, process.env.SECRET, '1hr') }
+      return { token: createToken(user, 'dsgsdgsdgr45t4tg4s4wgs', '1hr') }
     },
     deleteUserRecipe: async(root, {_id}, { Recipe }) => {
       const recipe = await Recipe.findOneAndRemove({ _id })
@@ -99,7 +99,7 @@ exports.resolvers = {
         email: input.email,
         password: input.password,
       }).save()
-      return { token: createToken(newUser, process.env.SECRET, '1hr') }
+      return { token: createToken(newUser, 'dsgsdgsdgr45t4tg4s4wgs', '1hr') }
     }
   }
 }
