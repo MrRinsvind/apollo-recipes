@@ -25,6 +25,7 @@
       "@babel/preset-react"
     ],
     "plugins": [
+      "babel-plugin-react-require",
       "@babel/plugin-syntax-dynamic-import",
       "@babel/plugin-syntax-import-meta",
       "@babel/plugin-proposal-class-properties",
@@ -60,6 +61,7 @@
     "@babel/preset-env": "^7.1.0",
     "@babel/preset-react": "^7.0.0",
     "babel-loader": "^8.0.0",
+    "babel-plugin-react-require": "^3.0.0",
     "babel-polyfill": "^6.26.0",
     "react-hot-loader": "^4.3.8",
     "webpack": "^4.19.1",

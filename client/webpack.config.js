@@ -8,7 +8,7 @@ const htmlWebpackPlugin = new HtmlWebPackPlugin({
 });
 
 module.exports = {
-  entry: ['babel-polyfill', './src/index.js'],
+  entry: ['babel-polyfill', './src/app/index.js'],
   module: {
     rules: [
       {
@@ -28,7 +28,8 @@ module.exports = {
     mainFields: ['browser', 'main', 'module'],
     extensions: ['.json', '.js', '.jsx', 'css'],
     modules: [
-      'node_modules'
+      'node_modules',
+      'src/app'
     ]
 
   },
@@ -39,12 +40,6 @@ module.exports = {
   },
   plugins: [
     htmlWebpackPlugin,
-    // ["@babel/plugin-transform-runtime", {
-    //   "corejs": false,
-    //   "helpers": true,
-    //   "regenerator": true,
-    //   "useESModules": false
-    // }],
   ],
   devServer: {
     contentBase: './dist',
