@@ -15,6 +15,7 @@ const initialState = {
   description: '',
   username: '',
   imageUrl: '',
+  image:'',
 }
 
 class AddRecipeContainer extends Component {
@@ -45,7 +46,7 @@ class AddRecipeContainer extends Component {
     return !name || !category || !instructions || !description || !imageUrl
   }
   updateCache = (cache, { data: { addRecipe }}) => {
-    const { getAllRecipes } = cache.readQuery({ query: GET_ALL_RECIPES }) 
+    const { getAllRecipes } = cache.readQuery({ query: GET_ALL_RECIPES })
 
     cache.writeQuery({
       query: GET_ALL_RECIPES,
@@ -54,9 +55,14 @@ class AddRecipeContainer extends Component {
       }
     })
   }
+  fileChangedHandler = (event) => {
+    const image = event.target.files[0]
+    this.setState({ image })
+  }
   handleSubmit = (event, addRecipe) => {
+    console.log('state',this.state)
     event.preventDefault()
-    addRecipe().then(({ data }) => {
+    addRecipe({ variables:{ ...this.state }}).then(({ data }) => {
       this.setState({...initialState})
       this.props.history.push('/')
     })
@@ -66,27 +72,30 @@ class AddRecipeContainer extends Component {
     return(
       <Mutation
         mutation={ADD_RECIPE}
-        variables={{ ...this.state }}
+        // variables={{ ...this.state }}
         update={this.updateCache}
         refetchQueries={()=>[
-          { 
-            query: GET_USER_RECIPES, 
-            variables: { username: this.state.username } 
+          {
+            query: GET_USER_RECIPES,
+            variables: { username: this.state.username }
           },
         ]}
       >
         { ( addRecipe, { data, loading, error } ) => {
+          console.log('error',error)
+
           return(
             <AddRecipe
               {...this.state}
               handleChange={this.handleChange}
               handleSubmit={this.handleSubmit}
               handleEditorChange={this.handleEditorChange}
+              fileChangedHandler={this.fileChangedHandler}
               validateForm={this.validateForm}
               addRecipe={addRecipe}
               loading={loading}
               error={error}
-            /> 
+            />
           )
         }}
       </Mutation>

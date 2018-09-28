@@ -58,7 +58,7 @@ export const UNLIKE_RECIPE = gql`
 `
 
 export const ADD_RECIPE = gql`
-  mutation($name:String!, $category:String!, $imageUrl:String!, $description:String!, $instructions: String!, $username: String ) {
+  mutation($name:String!, $category:String!, $imageUrl:String!, $description:String!, $instructions: String!, $username: String, $image: Upload! ) {
     addRecipe(input:{
       name:$name
       category:$category
@@ -66,6 +66,7 @@ export const ADD_RECIPE = gql`
       instructions:$instructions
       username:$username
       imageUrl:$imageUrl
+      image:$image
     }){
       ...CompleteRecipe
     }
