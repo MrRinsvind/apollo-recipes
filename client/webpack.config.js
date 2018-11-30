@@ -1,6 +1,6 @@
 const webpack = require('webpack');
 const path = require('path')
-const HtmlWebPackPlugin = require("html-webpack-plugin");
+const HtmlWebPackPlugin = require("html-webpack-plugin")
 
 const htmlWebpackPlugin = new HtmlWebPackPlugin({
   template: "./src/public/index.html",
@@ -8,7 +8,7 @@ const htmlWebpackPlugin = new HtmlWebPackPlugin({
 });
 
 module.exports = {
-  entry: ['babel-polyfill', './src/index.js'],
+  entry: ['babel-polyfill', './src/app/index.js'],
   module: {
     rules: [
       {
@@ -28,6 +28,7 @@ module.exports = {
     mainFields: ['browser', 'main', 'module'],
     extensions: ['.json', '.js', '.jsx', 'css'],
     modules: [
+      'src/app',
       'node_modules'
     ]
 
@@ -39,12 +40,6 @@ module.exports = {
   },
   plugins: [
     htmlWebpackPlugin,
-    // ["@babel/plugin-transform-runtime", {
-    //   "corejs": false,
-    //   "helpers": true,
-    //   "regenerator": true,
-    //   "useESModules": false
-    // }],
   ],
   devServer: {
     contentBase: './dist',
