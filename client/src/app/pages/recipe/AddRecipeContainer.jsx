@@ -62,6 +62,7 @@ class AddRecipeContainer extends Component {
     })
   }
   render(){
+    console.log('validateForm',this.validateForm())
     return(
       <Mutation
         mutation={ADD_RECIPE}

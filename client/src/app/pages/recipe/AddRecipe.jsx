@@ -24,7 +24,7 @@ export default ({ handleChange, name, imageUrl, category, description, instructi
         content={instructions}
         events={{ change: handleEditorChange }}
       />
-      <button onClick={(event) => handleSubmit(event, addRecipe)} disabled={loading || validateForm()} type="submit" className="button-primary">Submit</button>
+      { validateForm() ? null : <button onClick={(event) => handleSubmit(event, addRecipe)} disabled={loading} type="submit" className="button-primary">Submit</button> }
       { error && <Error error={error}/> }
     </form>
   </div>
