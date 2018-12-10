@@ -8,15 +8,14 @@ export default ({ handleChange, name, imageUrl, category, description, instructi
     <h2 className="App">Add Recipe</h2>
     <form encType="multipart/form-data" onSubmit={(event) => handleSubmit(event, addRecipe)} className="form">
       <input type="text" value={name} name="name" placeholder="Recipe Name" onChange={handleChange}/>
-      <input type="text" value={imageUrl} name="imageUrl" placeholder="Recipe Image" onChange={handleChange}/>
-      <input type="file" onChange={props.fileChangedHandler} name="image" />
+      <input type="file" onChange={props.fileChangedHandler} name="imageUrl" accept=".png, .jpg, .jpeg"/>
       <select name="category" onChange={handleChange} value={category}>
         <option value="Breakfast">Breakfast</option>
         <option value="Lunch">Lunch</option>
         <option value="Dinner">Dinner</option>
         <option value="Snack">Snack</option>
       </select>
-      <input type="text" name="description" placeholder="Add description" onChange={handleChange} value={description}/>
+      <textarea name="description" placeholder="Add description" onChange={handleChange} value={description} cols="40"/>
 
 
       <label htmlFor="instructions">Add instructions</label>

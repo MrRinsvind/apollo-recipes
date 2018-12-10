@@ -12,7 +12,6 @@ export const recipeFragments = {
       likes
       username
       imageUrl
-      image
     }
   `,
   like: gql`

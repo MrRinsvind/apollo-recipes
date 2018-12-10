@@ -1,4 +1,4 @@
-import { gql } from 'apollo-boost'
+import gql from 'graphql-tag'
 
 import { recipeFragments } from './fragments'
 
@@ -57,8 +57,16 @@ export const UNLIKE_RECIPE = gql`
   ${recipeFragments.like}
 `
 
+export const UPLOAD_FILE = gql`
+   mutation uploadFile($file: Upload!) {
+    uploadFile(file: $file) {
+      name
+    }
+  }
+`
+
 export const ADD_RECIPE = gql`
-  mutation($name:String!, $category:String!, $imageUrl:String!, $description:String!, $instructions: String!, $username: String, $image: Upload! ) {
+  mutation($name:String!, $category:String!, $imageUrl:Upload!, $description:String!, $instructions: String!, $username: String) {
     addRecipe(input:{
       name:$name
       category:$category
@@ -66,7 +74,6 @@ export const ADD_RECIPE = gql`
       instructions:$instructions
       username:$username
       imageUrl:$imageUrl
-      image:$image
     }){
       ...CompleteRecipe
     }

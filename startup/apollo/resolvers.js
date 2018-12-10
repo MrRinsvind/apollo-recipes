@@ -1,14 +1,15 @@
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
+const fs = require('fs')
 
 const createToken = (user, secret, expiresIn) => {
   const { username, email } = user
   return jwt.sign({ username, email }, secret, { expiresIn })
 }
 
-
 exports.resolvers = {
   Query: {
+    uploads: (parent, args) => {},
     getAllRecipes: async (root, { input }, { Recipe })=>{
       const allRecipes = await Recipe.find().sort({ createdDate: "desc" })
       return allRecipes
@@ -16,6 +17,9 @@ exports.resolvers = {
     getRecipe: async (root, { _id }, { Recipe }) => {
       const recipe = await Recipe.findOne({ _id })
       return recipe
+    },
+    uploads: () => {
+      // Return the record of files uploaded from your DB or API or filesystem.
     },
     searchRecipes: async(root, { searchTerm }, { Recipe }) => {
       if(searchTerm){
@@ -54,12 +58,22 @@ exports.resolvers = {
   },
   Mutation: {
     addRecipe: async (root, { input }, { Recipe }) => {
+      const { stream, filename, mimetype, encoding } = await input.imageUrl
+      const imageName = Date.parse(new Date())
+      var myFile = fs.createWriteStream(`img/${imageName}.png`)
+      stream.pipe(myFile)
+
+      await stream.on('end', async function(){
+        console.log("THE END")
+      })
+
       const newRecipe = await new Recipe({
         name: input.name,
         description: input. description,
         category: input.category,
         instructions: input.instructions,
         username: input.username,
+        imageUrl: `http://localhost:4444/img/${imageName}.png`
       }).save()
       return newRecipe
     },
@@ -73,7 +87,7 @@ exports.resolvers = {
       if(!isValidPassword){
         throw new Error('Invalid password')
       }
-      return { token: createToken(user, 'dsgsdgsdgr45t4tg4s4wgs', '1hr') }
+      return { token: createToken(user, process.env.SECRET_FOR_TOKEN, '1hr') }
     },
     deleteUserRecipe: async(root, {_id}, { Recipe }) => {
       const recipe = await Recipe.findOneAndRemove({ _id })
@@ -99,7 +113,7 @@ exports.resolvers = {
         email: input.email,
         password: input.password,
       }).save()
-      return { token: createToken(newUser, 'dsgsdgsdgr45t4tg4s4wgs', '1hr') }
+      return { token: createToken(newUser, process.env.SECRET_FOR_TOKEN, '1hr') }
     }
   }
 }

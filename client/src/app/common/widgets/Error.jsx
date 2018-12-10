@@ -1,1 +1,1 @@
-export default Error = ({ error }) => <p>{error.message}</p>
+export default Error = ({ error }) => 123

@@ -1,11 +1,11 @@
-const webpack = require('webpack');
+const webpack = require('webpack')
 const path = require('path')
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 
 const htmlWebpackPlugin = new HtmlWebPackPlugin({
   template: "./src/public/index.html",
   filename: "./index.html"
-});
+})
 
 module.exports = {
   entry: ['babel-polyfill', './src/app/index.js'],
@@ -21,6 +21,15 @@ module.exports = {
       }, {
         test: /\.css$/,
         use: ["style-loader", "css-loader"]
+      }, {
+        test: /\.(png|jpg|gif)$/,
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+            }
+          }
+        ]
       }
     ]
   },
@@ -46,5 +55,5 @@ module.exports = {
     port: 3333,
     hot: true,
     historyApiFallback: true,
-  }
-};
+  },
+}

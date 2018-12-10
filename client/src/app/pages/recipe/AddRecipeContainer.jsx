@@ -15,7 +15,6 @@ const initialState = {
   description: '',
   username: '',
   imageUrl: '',
-  image:'',
 }
 
 class AddRecipeContainer extends Component {
@@ -43,7 +42,7 @@ class AddRecipeContainer extends Component {
 
   validateForm = () => {
     const { name, category, instructions,  description, imageUrl } = this.state
-    return !name || !category || !instructions || !description || !imageUrl
+    return !name || !category || !instructions || !description
   }
   updateCache = (cache, { data: { addRecipe }}) => {
     const { getAllRecipes } = cache.readQuery({ query: GET_ALL_RECIPES })
@@ -56,23 +55,23 @@ class AddRecipeContainer extends Component {
     })
   }
   fileChangedHandler = (event) => {
-    const image = event.target.files[0]
-    this.setState({ image })
+    const imageUrl = event.target.files[0]
+    this.setState({ imageUrl })
   }
   handleSubmit = (event, addRecipe) => {
-    console.log('state',this.state)
     event.preventDefault()
     addRecipe({ variables:{ ...this.state }}).then(({ data }) => {
       this.setState({...initialState})
       this.props.history.push('/')
     })
   }
+
   render(){
     console.log('validateForm',this.validateForm())
     return(
       <Mutation
         mutation={ADD_RECIPE}
-        // variables={{ ...this.state }}
+        variables={{ ...this.state }}
         update={this.updateCache}
         refetchQueries={()=>[
           {
