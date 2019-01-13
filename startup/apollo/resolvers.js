@@ -60,20 +60,15 @@ exports.resolvers = {
     addRecipe: async (root, { input }, { Recipe }) => {
       const { stream, filename, mimetype, encoding } = await input.imageUrl
       const imageName = Date.parse(new Date())
-      var myFile = fs.createWriteStream(`img/${imageName}.png`)
+      var myFile = fs.createWriteStream(`public/images/${imageName}.png`)
       stream.pipe(myFile)
-
-      await stream.on('end', async function(){
-        console.log("THE END")
-      })
-
       const newRecipe = await new Recipe({
         name: input.name,
         description: input. description,
         category: input.category,
         instructions: input.instructions,
         username: input.username,
-        imageUrl: `http://localhost:4444/img/${imageName}.png`
+        imageUrl: `http://localhost:4444/images/${imageName}.png`
       }).save()
       return newRecipe
     },

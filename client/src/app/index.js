@@ -8,7 +8,6 @@ import { InMemoryCache } from 'apollo-cache-inmemory'
 
 import './index.css'
 
-
 const authLink = setContext((_, { headers }) => {
   // get the authentication token from local storage if it exists
   const token = localStorage.getItem('token');
@@ -23,7 +22,7 @@ const authLink = setContext((_, { headers }) => {
 
 
 const client = new ApolloClient({
-  link: authLink.concat(createUploadLink({ uri: 'http://localhost:4444/graphql' })),
+  link: authLink.concat(createUploadLink({ uri: process.env.API_URI })),
   // uri: 'https://mr-rinsvind-recipes.herokuapp.com/graphql',
   fetchOptions: {
     credentials: 'include',

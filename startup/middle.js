@@ -11,7 +11,7 @@ module.exports = function(app){
   app.use(cors(corsOptions))
   app.use(express.static('public'))
 //Serves all the request which includes /images in the url from Images folder
-  app.use('/public/images', express.static(__dirname + '/public/images'))
+  app.use('/images', express.static(__dirname + '/images/public'))
 // Set up JWT authentication middleware
   app.use(async (req, res, next) => {
     const token = req.headers['authorization']

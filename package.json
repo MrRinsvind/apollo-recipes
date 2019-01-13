@@ -35,7 +35,7 @@
   "homepage": "https://github.com/MrRinsvind/apollo-recipes#readme",
   "dependencies": {
     "apollo-server-express": "^2.1.0",
-    "bcrypt": "^3.0.0",
+    "bcrypt": "^3.0.3",
     "body-parser": "^1.18.3",
     "concurrently": "^4.0.0",
     "cors": "^2.8.4",
