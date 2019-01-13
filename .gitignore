@@ -6,3 +6,4 @@ yarn-lock.json
 
 .history
 .idea
+.DS_Store
