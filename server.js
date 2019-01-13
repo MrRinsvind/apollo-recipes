@@ -4,9 +4,11 @@ require('dotenv').config()
 
 const app = express()
 
+
 require('./startup/db')()
 require('./startup/middle.js')(app)
 require('./startup/apollo/')(app)
+
 
 if(process.env.NODE_ENV === 'production' || true){
   app.use(express.static('client/build'))
@@ -15,7 +17,7 @@ if(process.env.NODE_ENV === 'production' || true){
   })
 }
 
+
 app.listen(process.env.SERVER_PORT, ()=>{
   console.log(`Server listening on port ${process.env.SERVER_PORT}`)
 })
-
