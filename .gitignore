@@ -1,6 +1,5 @@
 node_modules/
 client/dist/bundle.js
-.env
 
 .history
 .idea
