@@ -1,8 +1,12 @@
-exports.typeDefs = `
+const { gql } = require('apollo-server-express')
+
+exports.typeDefs = gql`
+  scalar Upload
+
   type Recipe {
     _id: ID
     name: String!
-    imageUrl: String!
+    imageUrl: Upload!
     category: String!
     description: String!
     instructions: String!
@@ -21,8 +25,16 @@ exports.typeDefs = `
     favorites: [Recipe]
   }
 
+   type File {
+    filename: String!
+    mimetype: String!
+    encoding: String!
+  }
+
+ 
 
   type Query{
+    uploads: [File]
     getAllRecipes: [Recipe]
     getRecipe(_id: ID!): Recipe
     getCurrentUser: User
@@ -39,7 +51,7 @@ exports.typeDefs = `
     description: String!
     category: String!
     instructions: String!
-    imageUrl: String!
+    imageUrl: Upload!
     username: String
   }
 
@@ -61,6 +73,6 @@ exports.typeDefs = `
     unlikeRecipe(_id: ID!, username: String!): Recipe
     signinUser(input: SigninInput): Token
     signupUser(input: SignupInput): Token
-
+    singleUpload(file: Upload!): File!
   }
 `

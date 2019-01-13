@@ -1,10 +1,9 @@
 import { Component } from 'react'
 import posed from 'react-pose'
-
 import './Main.css'
 import { RecipeItem, Spinner } from 'common/widgets'
-import { Query } from 'react-apollo'
-import { GET_ALL_RECIPES } from 'queries'
+import { Query, Mutation } from 'react-apollo'
+import { GET_ALL_RECIPES, UPLOAD_FILE } from 'queries'
 
 
 const RecipeList = posed.ul({
@@ -21,7 +20,7 @@ const RecipeList = posed.ul({
 
 class Main extends Component{
   state = {
-    on: false
+    on: false,
   }
 
   componentDidMount(){
@@ -55,4 +54,4 @@ class Main extends Component{
   }
 }
 
-export default Main;
+export default Main

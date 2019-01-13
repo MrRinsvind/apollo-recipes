@@ -1,27 +1,33 @@
 import ReactDOM from 'react-dom'
-import ApolloClient from 'apollo-boost'
+import { createUploadLink } from 'apollo-upload-client'
 import { ApolloProvider } from 'react-apollo'
-
+import { ApolloClient } from 'apollo-client'
+import { setContext } from 'apollo-link-context'
 import Router from 'routes/Router'
-import './index.css';
+import { InMemoryCache } from 'apollo-cache-inmemory'
 
+import './index.css'
+
+const authLink = setContext((_, { headers }) => {
+  // get the authentication token from local storage if it exists
+  const token = localStorage.getItem('token');
+  // return the headers to the context so httpLink can read them
+  return {
+    headers: {
+      ...headers,
+      authorization: token ? `${token}` : "",
+    }
+  }
+});
 
 
 const client = new ApolloClient({
-  uri: 'http://localhost:4444/graphql',
+  link: authLink.concat(createUploadLink({ uri: process.env.API_URI })),
   // uri: 'https://mr-rinsvind-recipes.herokuapp.com/graphql',
   fetchOptions: {
-    credentials: 'include'
+    credentials: 'include',
   },
-
-  request: operation => {
-    const token = localStorage.getItem('token')
-    operation.setContext({
-      headers: {
-        authorization: token
-      }
-    })
-  },
+  cache: new InMemoryCache(),
 
   onError: ({ networkError }) => {
     if(networkError){
