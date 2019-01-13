@@ -13,7 +13,7 @@ require('./startup/apollo/')(app)
 if(process.env.NODE_ENV === 'production' || true){
   app.use(express.static('client/build'))
   app.get('*', (req, res)=>{
-    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
+    res.sendFile(path.resolve(__dirname, 'client', 'dist', 'index.html'))
   })
 }
 
