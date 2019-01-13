@@ -6,7 +6,7 @@ const dotenv = require('dotenv')
 // load .env file
 const config = dotenv.config({
   // dotenv use .env by default, but you can override this
-  path: './.env',
+  path: '.env',
 })
 
 // load default config from .env.default
