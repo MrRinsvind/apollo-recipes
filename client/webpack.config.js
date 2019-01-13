@@ -2,8 +2,11 @@ require ('./init-env') // SHOULD BE FIRST
 
 const webpack = require('webpack')
 const path = require('path')
-const HtmlWebPackPlugin = require("html-webpack-plugin");
-const Dotenv = require('dotenv-webpack');
+const HtmlWebPackPlugin = require("html-webpack-plugin")
+const Dotenv = require('dotenv-webpack')
+const UglifyJsPlugin = require("uglifyjs-webpack-plugin")
+const MiniCssExtractPlugin = require("mini-css-extract-plugin")
+const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin")
 
 const htmlWebpackPlugin = new HtmlWebPackPlugin({
   template: "./src/public/index.html",
@@ -11,8 +14,17 @@ const htmlWebpackPlugin = new HtmlWebPackPlugin({
 })
 
 module.exports = {
-
     entry: ['babel-polyfill', './src/app/index.js'],
+    optimization: {
+      minimizer: [
+        new UglifyJsPlugin({
+          cache: true,
+          parallel: true,
+          sourceMap: true // set to true if you want JS source maps
+        }),
+        new OptimizeCSSAssetsPlugin({})
+      ]
+    },
     module: {
       rules: [
         {
@@ -24,7 +36,7 @@ module.exports = {
           }
         }, {
           test: /\.css$/,
-          use: ["style-loader", "css-loader"]
+          use: ["css-loader"]
         }, {
           test: /\.(png|jpg|gif)$/,
           use: [
@@ -53,6 +65,10 @@ module.exports = {
     plugins: [
       htmlWebpackPlugin,
       new Dotenv(),
+      new MiniCssExtractPlugin({
+        filename: "[name].css",
+        chunkFilename: "[id].css"
+      }),
     ],
     devServer: {
       contentBase: './dist',
