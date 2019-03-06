@@ -16,7 +16,6 @@
     "dotenv-webpack": "^1.6.0",
     "graphql": "^14.0.2",
     "graphql-tag": "^2.10.0",
-    "html-webpack-plugin": "^3.2.0",
     "jwt-decode": "^2.2.0",
     "react": "^16.4.2",
     "react-apollo": "^2.3.2",
@@ -28,32 +27,9 @@
     "react-spinners": "^0.4.5",
     "style-loader": "^0.23.0"
   },
-  "babel": {
-    "presets": [
-      "@babel/preset-env",
-      "@babel/preset-react"
-    ],
-    "plugins": [
-      "babel-plugin-react-require",
-      "@babel/plugin-syntax-dynamic-import",
-      "@babel/plugin-syntax-import-meta",
-      "@babel/plugin-proposal-class-properties",
-      "@babel/plugin-proposal-json-strings",
-      [
-        "@babel/plugin-proposal-decorators",
-        {
-          "legacy": true
-        }
-      ],
-      "@babel/plugin-proposal-function-sent",
-      "@babel/plugin-proposal-export-namespace-from",
-      "@babel/plugin-proposal-numeric-separator",
-      "@babel/plugin-proposal-throw-expressions"
-    ]
-  },
   "scripts": {
-    "start": "webpack-dev-server --hot --inline --config ./webpack.config.js --mode development",
-    "build": "webpack --mode production"
+    "dev": "webpack-dev-server --config webpack.dev.js",
+    "build": "webpack --config webpack.prod.js"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0",
@@ -72,13 +48,17 @@
     "babel-loader": "^8.0.0",
     "babel-plugin-react-require": "^3.0.0",
     "babel-polyfill": "^6.26.0",
+    "clean-webpack-plugin": "^1.0.0",
+    "extract-text-webpack-plugin": "^4.0.0-beta.0",
+    "html-webpack-plugin": "^3.2.0",
     "mini-css-extract-plugin": "^0.5.0",
     "optimize-css-assets-webpack-plugin": "^5.0.1",
     "react-hot-loader": "^4.3.8",
     "uglifyjs-webpack-plugin": "^2.1.1",
     "url-loader": "^1.1.2",
-    "webpack": "^4.19.1",
-    "webpack-cli": "^3.1.0",
-    "webpack-dev-server": "^3.1.14"
+    "webpack": "^4.28.4",
+    "webpack-cli": "^3.2.1",
+    "webpack-dev-server": "^3.1.14",
+    "webpack-merge": "^4.2.1"
   }
 }
